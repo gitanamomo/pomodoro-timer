@@ -1,0 +1,384 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #333;
+    overflow: hidden;
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    font-size: 28px;
+    color: #667eea;
+    font-weight: 600;
+}
+
+/* 计时器部分 */
+.timer-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.timer-circle {
+    width: 280px;
+    height: 280px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    position: relative;
+}
+
+.timer-circle::before {
+    content: '';
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: white;
+}
+
+.timer-display {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#timer-time {
+    font-size: 48px;
+    font-weight: 700;
+    color: #667eea;
+    letter-spacing: 2px;
+}
+
+.mode-label {
+    font-size: 14px;
+    color: #764ba2;
+    margin-top: 5px;
+    font-weight: 500;
+}
+
+.task-input {
+    margin-top: 20px;
+}
+
+.task-input input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.task-input input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+/* 控制按钮 */
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    justify-content: center;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    flex: 1;
+    max-width: 120px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+    background: #f5f5f5;
+    color: #666;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: #e0e0e0;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid #667eea;
+    color: #667eea;
+}
+
+.btn-outline:hover {
+    background: #667eea;
+    color: white;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* 设置部分 */
+.settings-section {
+    background: #f9f9f9;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.settings-header {
+    padding: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
+}
+
+.settings-header:hover {
+    background: #f0f0f0;
+}
+
+.settings-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #667eea;
+}
+
+.toggle-icon {
+    font-size: 12px;
+    color: #667eea;
+    transition: transform 0.3s;
+}
+
+.settings-header.active .toggle-icon {
+    transform: rotate(180deg);
+}
+
+.settings-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    padding: 0 15px;
+}
+
+.settings-content.active {
+    max-height: 300px;
+    padding: 15px;
+}
+
+.setting-item {
+    margin-bottom: 15px;
+}
+
+.setting-item:last-child {
+    margin-bottom: 0;
+}
+
+.setting-item label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #666;
+}
+
+.setting-item input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.setting-item input[type="number"]:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.setting-item input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+/* 统计部分 */
+.stats-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.stats-section h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    font-size: 12px;
+    opacity: 0.9;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+/* 历史记录按钮 */
+.history-section {
+    text-align: center;
+}
+
+/* 模态框 */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 350px;
+    max-height: 80vh;
+    overflow: hidden;
+}
+
+.modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    font-size: 20px;
+    color: #667eea;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #999;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    color: #667eea;
+}
+
+.modal-body {
+    padding: 20px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+#history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.history-item {
+    padding: 12px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    border-left: 3px solid #667eea;
+}
+
+.history-date {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.history-stats {
+    font-size: 14px;
+    color: #333;
+}
+
+/* 响应式调整 */
+@media (max-height: 700px) {
+    .timer-circle {
+        width: 240px;
+        height: 240px;
+    }
+
+    .timer-circle::before {
+        width: 220px;
+        height: 220px;
+    }
+
+    #timer-time {
+        font-size: 40px;
+    }
+}

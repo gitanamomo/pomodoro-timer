@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'">
+    <title>番茄钟</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🍅 番茄钟</h1>
+        </header>
+
+        <!-- 计时器显示 -->
+        <div class="timer-section">
+            <div class="timer-circle">
+                <div class="timer-display">
+                    <span id="timer-time">25:00</span>
+                    <span id="timer-mode" class="mode-label">工作时间</span>
+                </div>
+            </div>
+            <div class="task-input">
+                <input type="text" id="current-task" placeholder="当前任务..." autocomplete="off">
+            </div>
+        </div>
+
+        <!-- 控制按钮 -->
+        <div class="controls">
+            <button id="start-btn" class="btn btn-primary">开始</button>
+            <button id="pause-btn" class="btn btn-secondary" disabled>暂停</button>
+            <button id="reset-btn" class="btn btn-secondary">重置</button>
+        </div>
+
+        <!-- 设置面板 -->
+        <div class="settings-section">
+            <div class="settings-header" id="settings-toggle">
+                <h3>⚙️ 设置</h3>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="settings-content" id="settings-content">
+                <div class="setting-item">
+                    <label for="work-duration">工作时长（分钟）</label>
+                    <input type="number" id="work-duration" min="1" max="60" value="25">
+                </div>
+                <div class="setting-item">
+                    <label for="break-duration">休息时长（分钟）</label>
+                    <input type="number" id="break-duration" min="1" max="30" value="5">
+                </div>
+                <div class="setting-item">
+                    <label for="sound-enabled">
+                        <input type="checkbox" id="sound-enabled" checked>
+                        声音提醒
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label for="notification-enabled">
+                        <input type="checkbox" id="notification-enabled" checked>
+                        系统通知
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 统计信息 -->
+        <div class="stats-section">
+            <h3>📊 今日统计</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">完成番茄</span>
+                    <span class="stat-value" id="today-pomodoros">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">工作时长</span>
+                    <span class="stat-value" id="today-work-time">0分钟</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 历史记录按钮 -->
+        <div class="history-section">
+            <button id="history-btn" class="btn btn-outline">查看历史记录</button>
+        </div>
+    </div>
+
+    <!-- 历史记录模态框 -->
+    <div id="history-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>历史记录</h2>
+                <button id="close-modal" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="history-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="timer.js"></script>
+    <script src="renderer.js"></script>
+</body>
+</html>
